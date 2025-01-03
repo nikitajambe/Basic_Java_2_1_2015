@@ -1,0 +1,30 @@
+package patterns;
+
+import java.util.Scanner;
+
+public class findEle {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		int j;
+		int[] numbers = { 1, 2, 3, 4, 5 };
+
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the position ");
+		int i = sc.nextInt();
+
+		System.out.println("Enter the Number ");
+		int n = sc.nextInt();
+		
+
+		for ( j = 0; j < 5; j++) {
+			if(numbers[i] == numbers[j]) {
+				j=n;s
+				 
+			}
+			System.out.print(numbers[j]);
+		}
+	}
+
+}

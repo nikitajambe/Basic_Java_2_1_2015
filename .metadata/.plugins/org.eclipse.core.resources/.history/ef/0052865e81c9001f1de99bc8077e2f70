@@ -1,0 +1,59 @@
+package patterns;
+
+import java.util.Scanner;
+
+public class OneDArray {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+//		syntax
+//		data_type array_name[] = new data_type[size]
+
+		int arr[] = new int[5]; // daynamic
+		int arr2[] = { 1, 2, 3, 4, 5 }; // static way
+	
+		Scanner sc = new Scanner(System.in);
+
+		for (int i = 0; i < 5; i++) {
+
+			System.out.print("enter the element :");
+			arr[i] = sc.nextInt();
+		}
+
+		for (int i = 0; i < 5; i++) {
+			System.out.print(arr[i] + " ");
+		}
+		
+//		finding element
+		int num[]= {4,5,6,7,8};
+		System.out.println("Enter the number to find :");
+        int key = sc.nextInt();
+        
+        
+//        for(int i = 0 ;i<5;i++) {
+//        	if(num[i]==key) {
+//        		System.out.println("key fount in position :"+i);
+//        		break;
+//        	}else {
+//        		System.out.println("Key doesnt match");
+//        		break;
+//        	}
+//        }
+        
+        
+        int flag = 0;
+        for(int i = 0 ;i<5;i++) {
+        	if(num[i]==key) {
+        		flag=num[i];
+        	}
+        }
+        
+        if(flag==key) {
+        	System.out.println("found");
+        }else {
+        	System.out.println("Nt found");
+        }
+	}
+
+}

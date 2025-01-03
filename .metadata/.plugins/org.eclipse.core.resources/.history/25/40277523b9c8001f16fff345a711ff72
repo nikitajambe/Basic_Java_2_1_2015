@@ -1,0 +1,22 @@
+package patterns;
+
+public class pascaleTriangle {
+	public static void main(String args[]) {
+    int row ,col;
+    int[][] arr;
+
+	for( row= 1 ; row<=5 ; row++) {
+		for(col = 1; col<=row ;col ++) {
+//			arr[row][col]=0;
+			
+			if(col == 1 || col == row) {
+				arr[col][row] = 1;
+				System.out.println( arr[col][row]);
+			}
+			else {
+				arr[row][col] = arr[row-1][col-1] + arr[row -1][col];
+			}
+		}
+	}
+}
+	}
