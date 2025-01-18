@@ -1,0 +1,49 @@
+
+qwe
+ee
+
+ewr
+
+java is open source
+java is independent
+
+first name of java is oak
+
+
+
+ "CREATE TABLE example (" + "id INT PRIMARY KEY, " + "name VARCHAR(20), " + "age INT)"
+
+ "CREATE TABLE Example(" + "id int primary key," + "name varchar(20)," + " age INT)" ;
+
+
+Dependency Injction : DI is nothing but injecting one object of one class into another class is known as DI
+
+Inversion of Control : giving control of creating any object is known as ioc
+
+pom.xml :-> project object mapping
+
+Bean and Config.xml both are main component which are we provided in IOC component
+
+Q . what is difference between list and set ??
+
+________________________________________________________________
+.spring core dependency 5.3.1
+
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-core</artifactId>
+    <version>5.3.19</version>
+</dependency>
+
+________________________________________________________________
+
+.spring context maven
+
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>5.3.19</version>
+</dependency>
+
