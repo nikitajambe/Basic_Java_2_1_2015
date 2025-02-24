@@ -18,71 +18,80 @@ import java.sql.ResultSet;
 
 @WebServlet("/ULogin")
 public class ULogin extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+	 private static final long serialVersionUID = 1L;
+	    public Connection con;
 
-	Connection con ;
-	Statement st ;
-	ResultSet rs ;
-	
-   
-    public ULogin() {
-        super();
-       
-    }
-    
-    
-    @Override
-    public void init() throws ServletException {
-    	
-    	super.init();
-    	
-    	try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Login","root","Mysql@2001");
-	    	
-			Statement st =con.createStatement();
-			ResultSet rs = st.executeQuery("select * from users");
-			
-			while(rs.next()) {
-				System.out.println("r = "+rs.getInt(1) +" |"+ rs.getString(1) +" |"+ rs.getString(2));
-				System.out.println("Thank You");
-			}
-			
-			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
-    }
+	    public void LoginServlet() {
+	        
+	    }
 
+	    @Override
+	    public void init() throws ServletException {
+	        super.init();
+	        try {
+	            Class.forName("com.mysql.cj.jdbc.Driver");
+	            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Login", "root", "Mysql@2001");
+	        } catch (SQLException | ClassNotFoundException e) {
+	            e.printStackTrace();
+	        }
+	    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		response.setContentType("text/html");        //resp.setContentType use to define response content format
-		PrintWriter out = response.getWriter();      //PrintWriter used to insert content on html page ->resp.getWriter() creates a html file to write
-		out.println("helloworld. welcome to"); //normal string
+	    @Override
+	    public void destroy() {
+	        try {
+	            if (con != null) con.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        super.destroy();
+	    }
 
-    	out.println("<form method=\"GET\">"); //html element
-    	out.println("<input type='text' placeholder='Enter your password'/>"); //html element
-    	out.println("<input type='text' placeholder='Enter your user name'/>");//new line
-    	out.println("</br>");//new line
-    	out.println("</form>"); //html element
-		
-//		pic jonhson control
-	}
+	    @Override
+	    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	        resp.setContentType("text/html");
+	        PrintWriter out = resp.getWriter();
+	        out.println("Welcome to login page");
+	        out.println("</br>");
+	        out.println("</br>");
+	        out.println("<form method=\"POST\">"); // Changed method to POST for security
+	        out.println("<input type=\"text\" name=\"username\" placeholder=\"Enter username\" required/>");
+	        out.println("</br>");
+	        out.println("</br>");
+	        out.println("<input type=\"password\" name=\"password\" placeholder=\"Enter password\" required/>");
+	        out.println("</br>");
+	        out.println("</br>");
+	        out.println("<input type=\"submit\" name=\"submit\" value=\"Login\"/>");
+	        out.println("</form>");
+	    }
 
+	    @Override
+	    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	        String username = request.getParameter("username");
+	        String password = request.getParameter("password");
 
-	@Override
-	public void destroy() {
-		
-		super.destroy();
-	}
+	        response.setContentType("text/html");
+	        PrintWriter out = response.getWriter();
+
+	        try {
+	            // Use PreparedStatement to prevent SQL injection
+	            String sql = "SELECT * FROM users WHERE user = ? AND password = ?";
+	            PreparedStatement pst = con.prepareStatement(sql);
+	            pst.setString(1, username);
+	            pst.setString(2, password);
+
+	            ResultSet rs = pst.executeQuery();
+
+	            if (rs.next()) {
+	                // Successful login
+	                out.println("<h2>Login Successful! Welcome, " + username + ".</h2>");
+	            } else {
+	                // Invalid credentials
+	                out.println("<h2>Invalid Username or Password. Please try again.</h2>");
+	            }
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
 
 }
