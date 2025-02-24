@@ -50,6 +50,7 @@ public class ULogin extends HttpServlet {
 	    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	        resp.setContentType("text/html");
 	        PrintWriter out = resp.getWriter();
+	        
 	        out.println("Welcome to login page");
 	        out.println("</br>");
 	        out.println("</br>");
